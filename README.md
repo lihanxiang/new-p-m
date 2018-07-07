@@ -411,6 +411,6 @@ public class ProductServiceImpl implements ProductService {
 
 控制器中的其他方法和这个都类似，这里就不一一说明，源码中有注释
 
-到此，版本 0.1 就算完成了
-
 系统的外观和 p-m 一样，没有改变
+
+到此，版本 0.1 就算完成了
