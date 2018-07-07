@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <form id="itemForm" action="${pageContext.request.contextPath }/edit.action" method="post" >
+    <form id="itemForm" action="edit.action" method="post" >
         <input type="hidden" name="id" value="${product.id}">
         <div id="edit">
             <input type="text" name="barcode" value="${product.barcode}"/>

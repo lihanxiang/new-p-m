@@ -13,7 +13,7 @@
 </head>
 <body>
     <h3 align="center">Add Product</h3>
-    <form id="productForm" action="${pageContext.request.contextPath }/addProduct.action" method="post" >
+    <form id="productForm" action="addProduct.action" method="post" >
         <div id="add">
             <input type="text" name="barcode" required="required" placeholder="Barcode" /><br/>
             <input type="text" name="name" required="required" placeholder="Name"/><br/>

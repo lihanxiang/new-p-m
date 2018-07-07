@@ -15,7 +15,7 @@
 <body>
 <br><br>
 <h3 align="center">Find Product</h3>
-<form action="${pageContext.request.contextPath }/findProduct.action" method="post">
+<form action="findProduct.action" method="post">
     <div id="query">
         <input type="text" name="barcode" placeholder="Barcode" /><br/>
         <input type="text" name="name" placeholder="Name"/><br/>

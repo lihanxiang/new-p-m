@@ -37,8 +37,8 @@
                 <td>${item.saleprice }</td>
                 <td>${item.inventory }</td>
                 <td>
-                    <a href="${pageContext.request.contextPath }/preEdit.action?id=${item.id}">Edit</a>
-                    <a href="${pageContext.request.contextPath }/deleteProduct.action?id=${item.id}">Delete</a>
+                    <a href="preEdit.action?id=${item.id}">Edit</a>
+                    <a href="deleteProduct.action?id=${item.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
