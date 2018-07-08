@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="po.Product">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="units" jdbcType="VARCHAR" property="units" />
+    <result column="purchasePrice" jdbcType="VARCHAR" property="purchaseprice" />
+    <result column="salePrice" jdbcType="VARCHAR" property="saleprice" />
+    <result column="inventory" jdbcType="VARCHAR" property="inventory" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, barcode, name, units, purchasePrice, salePrice, inventory
+  </sql>
+  <select id="selectByExample" parameterType="po.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.ProductExample">
+    delete from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.Product">
+    insert into product (id, barcode, name, 
+      units, purchasePrice, salePrice, 
+      inventory)
+    values (#{id,jdbcType=VARCHAR}, #{barcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{units,jdbcType=VARCHAR}, #{purchaseprice,jdbcType=VARCHAR}, #{saleprice,jdbcType=VARCHAR}, 
+      #{inventory,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="po.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="barcode != null">
+        barcode,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="units != null">
+        units,
+      </if>
+      <if test="purchaseprice != null">
+        purchasePrice,
+      </if>
+      <if test="saleprice != null">
+        salePrice,
+      </if>
+      <if test="inventory != null">
+        inventory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="units != null">
+        #{units,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseprice != null">
+        #{purchaseprice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleprice != null">
+        #{saleprice,jdbcType=VARCHAR},
+      </if>
+      <if test="inventory != null">
+        #{inventory,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.ProductExample" resultType="java.lang.Long">
+    select count(*) from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barcode != null">
+        barcode = #{record.barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.units != null">
+        units = #{record.units,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseprice != null">
+        purchasePrice = #{record.purchaseprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleprice != null">
+        salePrice = #{record.saleprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventory != null">
+        inventory = #{record.inventory,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product
+    set id = #{record.id,jdbcType=VARCHAR},
+      barcode = #{record.barcode,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      units = #{record.units,jdbcType=VARCHAR},
+      purchasePrice = #{record.purchaseprice,jdbcType=VARCHAR},
+      salePrice = #{record.saleprice,jdbcType=VARCHAR},
+      inventory = #{record.inventory,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.Product">
+    update product
+    <set>
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="units != null">
+        units = #{units,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseprice != null">
+        purchasePrice = #{purchaseprice,jdbcType=VARCHAR},
+      </if>
+      <if test="saleprice != null">
+        salePrice = #{saleprice,jdbcType=VARCHAR},
+      </if>
+      <if test="inventory != null">
+        inventory = #{inventory,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.Product">
+    update product
+    set barcode = #{barcode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      units = #{units,jdbcType=VARCHAR},
+      purchasePrice = #{purchaseprice,jdbcType=VARCHAR},
+      salePrice = #{saleprice,jdbcType=VARCHAR},
+      inventory = #{inventory,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
