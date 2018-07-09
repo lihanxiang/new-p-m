@@ -1,6 +1,7 @@
 package po;
 
 public class Product {
+
     private String id;
 
     private String barcode;
